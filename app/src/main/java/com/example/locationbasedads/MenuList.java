@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.HttpAuthHandler;
@@ -66,7 +67,8 @@ public class MenuList extends AppCompatActivity {
     private void prepareMovieData() {
         //Toast.makeText(this, ""+value, Toast.LENGTH_SHORT).show();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+       // Intent intent = getIntent();
+        //String str = intent.getStringExtra("fc");
         DatabaseReference ref = database.getReference("AddMenu");
 
 // Attach a listener to read the data at our posts reference

@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity{
         FcDist= calDistance(latitude,longitude,Liblat,Liblong);
        // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
 
-        Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
         if (FcDist <= 100 && flag==0)  {
         flag=1;
             //createNotification();
@@ -250,15 +250,17 @@ public class MainActivity extends AppCompatActivity{
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_style);
         String strtitle = "Food Court";
         String strtext = "For the love of delicious food...";
+        //String fc = "FC";
         Intent intent = new Intent(this, MenuList.class);
         intent.putExtra("title", strtitle);
         intent.putExtra("text", strtext);
+        //intent.putExtra("fc", fc);
         //intent.putExtra("lat",FClat);
         //intent.putExtra("long",FClong);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
-                .setVibrate( new long []{ 1000 , 1000 , 1000 , 1000 , 1000 })
+                .setVibrate( new long []{ 500 , 1000 })
                 .setAutoCancel(true) .setContentIntent(pIntent)
                 .setContent(remoteViews);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
