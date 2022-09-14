@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LocAds</string>
+    <string name="prompt">Hello</string>
+    <string name="prompt2">Welcome to LocAds</string>
+    <string name="title_location_permission" />
+    <string name="text_location_permission" />
+    <string name="menulist">You will get menu here.....</string>
+    <string name="ok" />
+
+</resources>

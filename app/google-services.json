@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "930956402548",
+    "firebase_url": "https://adminlba-default-rtdb.firebaseio.com",
+    "project_id": "adminlba",
+    "storage_bucket": "adminlba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930956402548:android:c075e1e60755326a631621",
+        "android_client_info": {
+          "package_name": "com.example.adminlba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930956402548-9an262ladrj0gl6q3jb5v24c6g8a967f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpKZX30T1uclr3ZLQgF3K5junk4LOzhSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930956402548-9an262ladrj0gl6q3jb5v24c6g8a967f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930956402548:android:c6bd3d1061959159631621",
+        "android_client_info": {
+          "package_name": "com.example.locationbasedads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930956402548-9an262ladrj0gl6q3jb5v24c6g8a967f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpKZX30T1uclr3ZLQgF3K5junk4LOzhSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930956402548-9an262ladrj0gl6q3jb5v24c6g8a967f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
