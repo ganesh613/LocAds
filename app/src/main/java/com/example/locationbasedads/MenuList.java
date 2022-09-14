@@ -35,11 +35,9 @@ import java.util.TreeMap;
 public class MenuList extends AppCompatActivity {
 
 
-
-
    // HashMap.Entry<String,String> entry=hashMap.entrySet().iterator().next();
-    private List<MovieModel> movieList= new ArrayList<>();
-    private MoviesAdapter mAdapter;
+    private List<MenuModel> movieList= new ArrayList<>();
+    private MenuAdapter mAdapter;
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mGetReference = mDatabase.getReference();
@@ -54,7 +52,7 @@ public class MenuList extends AppCompatActivity {
       //  prepareMovieData();
 
 
-        mAdapter = new MoviesAdapter(movieList);
+        mAdapter = new MenuAdapter(movieList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -85,7 +83,7 @@ public class MenuList extends AppCompatActivity {
 
                    // Log.i("onDataChange", snapshot.getKey()+": "+imgURL+", "+userName);
                  //   Toast.makeText(MenuList.this, ""+snapshot.getKey()+" : "+imgURL+", "+userName+" "+itemNum, Toast.LENGTH_SHORT).show();
-                     MovieModel movie = new MovieModel(imgURL, itemNum, userName);
+                     MenuModel movie = new MenuModel(imgURL, itemNum, userName);
                     movieList.add(movie);
                     mAdapter.notifyDataSetChanged();
 

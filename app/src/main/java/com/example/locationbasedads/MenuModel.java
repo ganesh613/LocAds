@@ -2,12 +2,12 @@ package com.example.locationbasedads;
 
 import java.util.HashMap;
 
-public class MovieModel {
+public class MenuModel {
 
     private String title, genre, year;
-    public MovieModel() {
+    public MenuModel() {
     }
-    public MovieModel(String title, String genre, String year) {
+    public MenuModel(String title, String genre, String year) {
         this.title = title;
         this.genre = genre;
         this.year = year;

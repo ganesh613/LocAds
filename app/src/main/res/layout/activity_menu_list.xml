@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:layout_margin="0dp"
     android:orientation="vertical"
-    android:background="@drawable/photo_6327961435765846296_y"
     >
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="16dp"
