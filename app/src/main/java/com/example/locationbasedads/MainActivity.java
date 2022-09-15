@@ -67,30 +67,6 @@ public class MainActivity extends AppCompatActivity{
 //        welcomeThread.start();
         //end loading
 
-        //get live location of user by clicking button
-//        btnmap=(Button) findViewById(R.id.map);
-//        btnmap.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                gps = new GPSTracker(MainActivity.this);
-//                // check if GPS enabled
-//                if(gps.canGetLocation()){
-//                    double latitude = gps.getLatitude();
-//                    double longitude = gps.getLongitude();
-//                    // \n is for new line
-//                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-//                    //tvMyLocation.setText("latitude is :"+ latitude + "&&" + "longitude is :"+ longitude);
-//                    matchLocationNotification(latitude,longitude);
-//                }else{
-//                    // can't get location
-//                    // GPS or Network is not enabled
-//                    // Ask user to enable GPS/network in settings
-//                    gps.showSettingsAlert();
-//                }
-//            }
-//        });
-
-
         //getting location permission initially
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -106,7 +82,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    //for updating location every 10 seconds
+    //for updating location every 5 seconds
     protected void onResume() {
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
