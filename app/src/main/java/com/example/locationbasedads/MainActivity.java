@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.RemoteViews;
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity{
        // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
 
         //Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
-        if (FcDist <= 100 && flag==0)  {
+        if (FcDist <= 500 && flag==0)  {
         flag=1;
             //createNotification();
             //createNotification();
@@ -153,75 +154,7 @@ public class MainActivity extends AppCompatActivity{
            flag=0;
         }
     }
-    //start notification custom
-//    public RemoteViews getCustomDesign(String title, String message) {
-//        RemoteViews remoteViews = new RemoteViews(getApplicationContext().getPackageName(), R.layout.notification_style);
-//        remoteViews.setTextViewText(R.id.title, title);
-//        remoteViews.setTextViewText(R.id.message, message);
-//        remoteViews.setImageViewResource(R.id.icon, R.mipmap.logo_lba);
-//        return remoteViews;
-//    }
-    //end notification
 
-    private void createNotification() {
-//getCustomDesign("Faaaa","random");
-//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-//            NotificationChannel channel = new NotificationChannel("My notification","My notification",NotificationManager.IMPORTANCE_DEFAULT);
-//            channel.setDescription("Notification desc");
-//            channel.enableVibration(true);
-//
-//            NotificationManager manager= (NotificationManager) getSystemService(NotificationManager.class);
-//            if(manager == null){
-//
-//            }
-//
-//            manager.createNotificationChannel(channel);
-//        }else
-//      correctly executed code
-//        NotificationManager notificationManager;
-//
-//            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "My Notification");
-//
-//            builder.setSmallIcon(android.R.drawable.ic_dialog_alert);
-//
-//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.journaldev.com/"));
-//            Intent intent = new Intent(MainActivity.this,MenuList.class);
-//            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-//            builder.setContentIntent(pendingIntent);
-//            builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
-//            builder.setContentTitle("Notifications Title");
-//            builder.setContentText("Your notification content here.");
-//            builder.setSubText("Tap to view the website.");
-//
-//            notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//
-//            // Will display the notification in the notification bar
-//            notificationManager.notify(1, builder.build());
-
-// start of working code
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity. this, default_notification_channel_id );
-        mBuilder.setSmallIcon(R.drawable.logo_lba);
-        Intent intent = new Intent(MainActivity.this,MenuList.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-                mBuilder.setContentIntent(pendingIntent);
-                mBuilder.setContentTitle( "Food Court" );
-                mBuilder.setStyle( new NotificationCompat.InboxStyle());
-                mBuilder.setContentText( "For the love of delicious food..." ) ;
-//end of working code
-
-        NotificationManager mNotificationManager = (NotificationManager)
-                getSystemService(Context. NOTIFICATION_SERVICE ) ;
-        if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
-            int importance = NotificationManager. IMPORTANCE_LOW ;
-            NotificationChannel notificationChannel = new NotificationChannel( NOTIFICATION_CHANNEL_ID , "NOTIFICATION_CHANNEL_NAME" , importance) ;
-            mBuilder.setChannelId( NOTIFICATION_CHANNEL_ID ) ;
-            assert mNotificationManager != null;
-            mNotificationManager.createNotificationChannel(notificationChannel) ;
-        }
-        assert mNotificationManager != null;
-        mNotificationManager.notify(( int ) System. currentTimeMillis () ,
-                mBuilder.build()) ;
-    }
     public void CustomNotification() {
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_style);
         String strtitle = "Food Court";
@@ -233,7 +166,18 @@ public class MainActivity extends AppCompatActivity{
         //intent.putExtra("fc", fc);
         //intent.putExtra("lat",FClat);
         //intent.putExtra("long",FClong);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pIntent=null;
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
+            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
+        }
+        else{
+//            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
+            pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+      //  PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+       // PendingIntent pIntent =PendingIntent . getActivity ( this , 0 , intent ,
+         //       PendingIntent . FLAG_UPDATE_CURRENT  | PendingIntent . FLAG_MUTABLE ) ;
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
                 .setVibrate( new long []{ 500 , 1000 })

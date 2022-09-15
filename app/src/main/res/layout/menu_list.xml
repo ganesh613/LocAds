@@ -20,8 +20,7 @@
             android:layout_toStartOf="@+id/year"
             android:textColor="#222222"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/year"
             android:layout_width="wrap_content"
