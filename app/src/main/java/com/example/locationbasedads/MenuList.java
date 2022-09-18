@@ -1,37 +1,24 @@
 package com.example.locationbasedads;
 
+import android.graphics.Picture;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.webkit.HttpAuthHandler;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
 
 public class MenuList extends AppCompatActivity {
 
@@ -64,12 +51,14 @@ public class MenuList extends AppCompatActivity {
     }
 
 
+
     private void prepareMovieData() {
         //Toast.makeText(this, ""+value, Toast.LENGTH_SHORT).show();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
        // Intent intent = getIntent();
         //String str = intent.getStringExtra("fc");
         DatabaseReference ref = database.getReference("AddMenu");
+        ImageView rImage = findViewById(R.id.rImage);
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -79,13 +68,16 @@ public class MenuList extends AppCompatActivity {
                 //https://stackoverflow.com/questions/52737082/java-util-hashmap-cannot-be-cast-to-com-google-android-gms-maps-model-latlng
               // for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    String imgURL = snapshot.child("itemName").getValue(String.class);
-                    String itemNum = snapshot.child("itemNum").getValue(String.class);
-                    String userName = snapshot.child("itemPrice").getValue(String.class);
+                    String title = snapshot.child("itemName").getValue(String.class);
+                    String imgURL = snapshot.child("itemImage").getValue(String.class);
+                   // Picasso.get().load(imgURL).into(rImage);
+                    //Picasso.with(this).load(imgURL).into(rImage);
+
+                    String price = snapshot.child("itemPrice").getValue(String.class);
 
                    // Log.i("onDataChange", snapshot.getKey()+": "+imgURL+", "+userName);
                  //   Toast.makeText(MenuList.this, ""+snapshot.getKey()+" : "+imgURL+", "+userName+" "+itemNum, Toast.LENGTH_SHORT).show();
-                     MenuModel movie = new MenuModel(imgURL, itemNum, userName);
+                     MenuModel movie = new MenuModel(imgURL, title, price);
                     movieList.add(movie);
                     mAdapter.notifyDataSetChanged();
 

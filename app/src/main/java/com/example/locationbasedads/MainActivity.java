@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity{
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
                     // \n is for new line
-                  //  Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                     //tvMyLocation.setText("latitude is :"+ latitude + "&&" + "longitude is :"+ longitude);
 
                     matchLocationNotification(latitude,longitude);
@@ -143,14 +143,14 @@ public class MainActivity extends AppCompatActivity{
         FcDist= calDistance(latitude,longitude,Liblat,Liblong);
        // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
 
-        //Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
         if (FcDist <= 500 && flag==0)  {
         flag=1;
             //createNotification();
             //createNotification();
             CustomNotification();
         }
-       if(FcDist> 100 ){
+       if(FcDist> 500 ){
            flag=0;
         }
     }
@@ -166,21 +166,21 @@ public class MainActivity extends AppCompatActivity{
         //intent.putExtra("fc", fc);
         //intent.putExtra("lat",FClat);
         //intent.putExtra("long",FClong);
-        PendingIntent pIntent=null;
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
-            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
-        }
-        else{
-//            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
-            pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
-      //  PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        PendingIntent pIntent=null;
+//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
+//            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
+//        }
+//        else{
+////            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
+//            pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        }
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
        // PendingIntent pIntent =PendingIntent . getActivity ( this , 0 , intent ,
          //       PendingIntent . FLAG_UPDATE_CURRENT  | PendingIntent . FLAG_MUTABLE ) ;
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
-                .setVibrate( new long []{ 500 , 1000 })
+                .setVibrate( new long []{ 1000 , 1000,1000,1000 })
                 .setAutoCancel(true) .setContentIntent(pIntent)
                 .setContent(remoteViews);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);

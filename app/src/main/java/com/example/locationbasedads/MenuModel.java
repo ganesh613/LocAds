@@ -1,33 +1,35 @@
 package com.example.locationbasedads;
 
-import java.util.HashMap;
+import android.net.Uri;
 
 public class MenuModel {
 
-    private String title, genre, year;
+    private String  title,cost,img;
     public MenuModel() {
     }
-    public MenuModel(String title, String genre, String year) {
+    public MenuModel(String img, String title, String cost) {
         this.title = title;
-        this.genre = genre;
-        this.year = year;
+        this.cost = cost;
+        this.img = img;
     }
     public String getTitle() {
         return title;
     }
-    public void setTitle(String name) {
-        this.title = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
-    public String getYear() {
-        return year;
+    public String getCost() {return cost;}
+    public void setCost(String cost) {
+        this.cost = cost;
     }
-    public void setYear(String year) {
-        this.year = year;
-    }
-    public String getGenre() {
-        return genre;
-    }
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+
+    public String getImg(){return img;}
+    public void setImg(String img){this.img=img;}
+
+//    public String getGenre() {
+//        return genre;
+//    }
+//    public void setGenre(String genre) {
+//        this.genre = genre;
+//    }
 }
