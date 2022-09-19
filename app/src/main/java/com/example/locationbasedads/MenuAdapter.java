@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -48,9 +49,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
 //                .into(holder.picture);
         MenuModel movie = menuList.get(position);
         holder.title.setText(movie.getTitle());
-        Glide.with(img.getContext())
+        Glide.with(holder.itemView.getContext())
                 .load(movie.getImg())
-                        .into(img);
+                .fitCenter()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)         //ALL or NONE as your requirement
+                //.thumbnail(Glide.with(img.getContext()).load(R.drawable.img))
+                //.error(R.drawable.img)
+                .into(img);
 //        holder.img.(movie.getImg());
         holder.cost.setText(movie.getCost());
     }

@@ -1,6 +1,5 @@
 package com.example.locationbasedads;
 
-import android.graphics.Picture;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -72,7 +71,6 @@ public class MenuList extends AppCompatActivity {
                     String imgURL = snapshot.child("itemImage").getValue(String.class);
                    // Picasso.get().load(imgURL).into(rImage);
                     //Picasso.with(this).load(imgURL).into(rImage);
-
                     String price = snapshot.child("itemPrice").getValue(String.class);
 
                    // Log.i("onDataChange", snapshot.getKey()+": "+imgURL+", "+userName);

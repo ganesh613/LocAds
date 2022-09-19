@@ -18,10 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+
+import java.lang.annotation.Annotation;
 
 
-
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements GlideModule {
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
@@ -45,28 +48,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //loading screen
-//
-//        Thread welcomeThread = new Thread() {
-//
-//            @Override
-//            public void run() {
-//                try {
-//                    super.run();
-//                    sleep(10000);  //Delay of 10 seconds
-//                } catch (Exception e) {
-//
-//                } finally {
-//
-//                    Intent i = new Intent(MainActivity.this, MenuList.class);
-//                    startActivity(i);
-//                    finish();
-//                }
-//            }
-//        };
-//        welcomeThread.start();
-        //end loading
 
         //getting location permission initially
         if (ContextCompat.checkSelfPermission(MainActivity.this,
@@ -144,13 +125,13 @@ public class MainActivity extends AppCompatActivity{
        // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
 
         Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
-        if (FcDist <= 500 && flag==0)  {
+        if (FcDist <=700 && flag==0)  {
         flag=1;
             //createNotification();
             //createNotification();
             CustomNotification();
         }
-       if(FcDist> 500 ){
+       if(FcDist> 700 ){
            flag=0;
         }
     }
@@ -175,14 +156,13 @@ public class MainActivity extends AppCompatActivity{
 //            pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 //        }
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-       // PendingIntent pIntent =PendingIntent . getActivity ( this , 0 , intent ,
-         //       PendingIntent . FLAG_UPDATE_CURRENT  | PendingIntent . FLAG_MUTABLE ) ;
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
                 .setVibrate( new long []{ 1000 , 1000,1000,1000 })
                 .setAutoCancel(true) .setContentIntent(pIntent)
-                .setContent(remoteViews);
+                .setContent(remoteViews)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
 
         remoteViews.setTextViewText(R.id.title,strtitle);
@@ -223,5 +203,15 @@ public class MainActivity extends AppCompatActivity{
                 return;
             }
         }
+    }
+
+    @Override
+    public String glideName() {
+        return null;
+    }
+
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return null;
     }
 }
