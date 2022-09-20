@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity{
     double Liblong=80.825397;
     double FcDist,LibDist;
 
+    //for notification message
+    String strtitle,strtext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +136,18 @@ public class MainActivity extends AppCompatActivity{
         double distance = currentLocation.distanceTo(destination);
         return distance;
     }
+//    public void fc(){
+//        strtitle="Food Court";
+//        strtext="For the love of delicious food...";
+//    }
+//    public void lib(){
+//        strtitle="Central Library";
+//        strtext="Nothing is pleasanter than exploring a library ";
+//    }
+//    public void dh2(){
+//        strtitle ="Dinning Hall";
+//        strtext="";
+//    }
     private void matchLocationNotification(double latitude, double longitude) {
 //        Location currentLocation = new Location("locationA");
 //        currentLocation.setLatitude(FClat);
@@ -140,25 +155,25 @@ public class MainActivity extends AppCompatActivity{
 //        Location destination = new Location("locationB");
 //        destination.setLatitude(latitude);
 //        destination.setLongitude(longitude);
-        FcDist= calDistance(latitude,longitude,Liblat,Liblong);
-       // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
+        FcDist = calDistance(latitude, longitude, FClat, FClong);
+        // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
 
         //Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
-        if (FcDist <= 500 && flag==0)  {
-        flag=1;
+        if (FcDist <= 500 && flag == 0) {
+            flag = 1;
             //createNotification();
             //createNotification();
             CustomNotification();
         }
-       if(FcDist> 100 ){
-           flag=0;
+        if (FcDist > 100) {
+            flag = 0;
         }
     }
 
     public void CustomNotification() {
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_style);
-        String strtitle = "Food Court";
-        String strtext = "For the love of delicious food...";
+        strtitle = "Food Court";
+        strtext = "For the love of delicious food...";
         //String fc = "FC";
         Intent intent = new Intent(this, MenuList.class);
         intent.putExtra("title", strtitle);
@@ -181,6 +196,7 @@ public class MainActivity extends AppCompatActivity{
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
                 .setVibrate( new long []{ 500 , 1000 })
+                .setStyle(new NotificationCompat.InboxStyle())
                 .setAutoCancel(true) .setContentIntent(pIntent)
                 .setContent(remoteViews);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
