@@ -11,21 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
-    private List<MenuModel> moviesList;
+    private List<MenuModel> menuList;
 
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView title, year, genre;
+        TextView title, cost;
         MyViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
            // genre = view.findViewById(R.id.genre);
-            year = view.findViewById(R.id.year);
+            cost = view.findViewById(R.id.cost);
         }
     }
-    public MenuAdapter(List<MenuModel> moviesList) {
-        this.moviesList = moviesList;
+    public MenuAdapter(List<MenuModel> menuList) {
+        this.menuList = menuList;
     }
     @NonNull
     @Override
@@ -36,13 +36,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
     }
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        MenuModel movie = moviesList.get(position);
+        MenuModel movie = menuList.get(position);
         holder.title.setText(movie.getTitle());
 //        holder.genre.setText(movie.getGenre());
-        holder.year.setText(movie.getYear());
+        holder.cost.setText(movie.getCost());
     }
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return menuList.size();
     }
 }

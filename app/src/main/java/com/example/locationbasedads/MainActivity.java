@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.location.Priority;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -42,34 +43,13 @@ public class MainActivity extends AppCompatActivity{
     double FcDist,LibDist;
 
     //for notification message
-    String strtitle,strtext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //loading screen
-//
-//        Thread welcomeThread = new Thread() {
-//
-//            @Override
-//            public void run() {
-//                try {
-//                    super.run();
-//                    sleep(10000);  //Delay of 10 seconds
-//                } catch (Exception e) {
-//
-//                } finally {
-//
-//                    Intent i = new Intent(MainActivity.this, MenuList.class);
-//                    startActivity(i);
-//                    finish();
-//                }
-//            }
-//        };
-//        welcomeThread.start();
-        //end loading
+
 
         //getting location permission initially
         if (ContextCompat.checkSelfPermission(MainActivity.this,
@@ -165,15 +145,15 @@ public class MainActivity extends AppCompatActivity{
             //createNotification();
             CustomNotification();
         }
-        if (FcDist > 100) {
+        if (FcDist > 500) {
             flag = 0;
         }
     }
 
     public void CustomNotification() {
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_style);
-        strtitle = "Food Court";
-        strtext = "For the love of delicious food...";
+        String strtitle = "Food Court";
+        String strtext = "For the love of delicious food...";
         //String fc = "FC";
         Intent intent = new Intent(this, MenuList.class);
         intent.putExtra("title", strtitle);
@@ -195,12 +175,11 @@ public class MainActivity extends AppCompatActivity{
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
-                .setVibrate( new long []{ 500 , 1000 })
+                .setVibrate( new long []{ 1000 , 1000 })
                 .setStyle(new NotificationCompat.InboxStyle())
                 .setAutoCancel(true) .setContentIntent(pIntent)
                 .setContent(remoteViews);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
-
         remoteViews.setTextViewText(R.id.title,strtitle);
         remoteViews.setTextViewText(R.id.message,strtext);
         // Create Notification Manager

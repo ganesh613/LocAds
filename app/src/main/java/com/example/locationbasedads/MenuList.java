@@ -23,7 +23,7 @@ public class MenuList extends AppCompatActivity {
 
 
    // HashMap.Entry<String,String> entry=hashMap.entrySet().iterator().next();
-    private List<MenuModel> movieList= new ArrayList<>();
+    private List<MenuModel> menuList = new ArrayList<>();
     private MenuAdapter mAdapter;
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -39,7 +39,7 @@ public class MenuList extends AppCompatActivity {
       //  prepareMovieData();
 
 
-        mAdapter = new MenuAdapter(movieList);
+        mAdapter = new MenuAdapter(menuList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -61,18 +61,18 @@ public class MenuList extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                movieList.clear();
+                menuList.clear();
                 //https://stackoverflow.com/questions/52737082/java-util-hashmap-cannot-be-cast-to-com-google-android-gms-maps-model-latlng
               // for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    String imgURL = snapshot.child("itemName").getValue(String.class);
-                    String itemNum = snapshot.child("itemNum").getValue(String.class);
-                    String userName = snapshot.child("itemPrice").getValue(String.class);
+                    String itemName = snapshot.child("itemName").getValue(String.class);
+                  //  String itemNum = snapshot.child("itemNum").getValue(String.class);
+                    String itemPrice = snapshot.child("itemPrice").getValue(String.class);
 
-                   // Log.i("onDataChange", snapshot.getKey()+": "+imgURL+", "+userName);
-                 //   Toast.makeText(MenuList.this, ""+snapshot.getKey()+" : "+imgURL+", "+userName+" "+itemNum, Toast.LENGTH_SHORT).show();
-                     MenuModel movie = new MenuModel(imgURL, itemNum, userName);
-                    movieList.add(movie);
+                   // Log.i("onDataChange", snapshot.getKey()+": "+itemName+", "+itemPrice);
+                 //   Toast.makeText(MenuList.this, ""+snapshot.getKey()+" : "+itemName+", "+itemPrice+" "+itemNum, Toast.LENGTH_SHORT).show();
+                     MenuModel movie = new MenuModel(itemName, itemPrice);
+                    menuList.add(movie);
                     mAdapter.notifyDataSetChanged();
 
                 }

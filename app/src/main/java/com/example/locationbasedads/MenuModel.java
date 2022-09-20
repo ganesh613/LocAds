@@ -1,16 +1,11 @@
 package com.example.locationbasedads;
 
-import java.util.HashMap;
-
 public class MenuModel {
 
-    private String title, genre, year;
-    public MenuModel() {
-    }
-    public MenuModel(String title, String genre, String year) {
+    private String title, cost;
+    public MenuModel(String title, String cost) {
         this.title = title;
-        this.genre = genre;
-        this.year = year;
+        this.cost = cost;
     }
     public String getTitle() {
         return title;
@@ -18,16 +13,10 @@ public class MenuModel {
     public void setTitle(String name) {
         this.title = name;
     }
-    public String getYear() {
-        return year;
+    public String getCost() {
+        return cost;
     }
-    public void setYear(String year) {
-        this.year = year;
-    }
-    public String getGenre() {
-        return genre;
-    }
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setCost(String cost) {
+        this.cost = cost;
     }
 }
