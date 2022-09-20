@@ -22,7 +22,6 @@ import java.util.List;
 public class MenuList extends AppCompatActivity {
 
 
-   // HashMap.Entry<String,String> entry=hashMap.entrySet().iterator().next();
     private List<MenuModel> menuList = new ArrayList<>();
     private MenuAdapter mAdapter;
 

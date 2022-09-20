@@ -154,32 +154,19 @@ public class MainActivity extends AppCompatActivity{
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_style);
         String strtitle = "Food Court";
         String strtext = "For the love of delicious food...";
-        //String fc = "FC";
         Intent intent = new Intent(this, MenuList.class);
         intent.putExtra("title", strtitle);
         intent.putExtra("text", strtext);
-        //intent.putExtra("fc", fc);
         //intent.putExtra("lat",FClat);
         //intent.putExtra("long",FClong);
-        PendingIntent pIntent=null;
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
-            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
-        }
-        else{
-//            pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
-            pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
-      //  PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-       // PendingIntent pIntent =PendingIntent . getActivity ( this , 0 , intent ,
-         //       PendingIntent . FLAG_UPDATE_CURRENT  | PendingIntent . FLAG_MUTABLE ) ;
-
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
-                .setVibrate( new long []{ 1000 , 1000 })
-                .setStyle(new NotificationCompat.InboxStyle())
+                .setVibrate( new long []{ 1000 , 1000 , 1000 , 1000 , 1000 })
                 .setAutoCancel(true) .setContentIntent(pIntent)
                 .setContent(remoteViews);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
+
         remoteViews.setTextViewText(R.id.title,strtitle);
         remoteViews.setTextViewText(R.id.message,strtext);
         // Create Notification Manager
@@ -199,7 +186,6 @@ public class MainActivity extends AppCompatActivity{
                 builder.build()) ;
         //notificationmanager.notify(0, builder.build());
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,

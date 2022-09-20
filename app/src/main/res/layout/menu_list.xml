@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_margin="8dp"
+
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="13dp"
-        android:background="#7c8490"
         >
 
         <TextView
