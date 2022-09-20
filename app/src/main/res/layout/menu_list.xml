@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/year"
+            android:layout_toStartOf="@+id/cost"
             android:textColor="#222222"
             android:padding="3dp"
             android:textSize="16sp"
@@ -25,7 +25,7 @@
             android:textStyle="bold" />
         <TextView
             android:text="20"
-            android:id="@+id/year"
+            android:id="@+id/cost"
             android:textColor="#222222"
             android:textSize="17dp"
             android:textStyle="bold"

@@ -1,14 +1,9 @@
 package com.example.locationbasedads;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.notification.NotificationListenerService;
-import android.service.notification.StatusBarNotification;
 import android.widget.Toast;
 
-import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -24,10 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class MenuList extends AppCompatActivity {
-
-
+public class LibList extends AppCompatActivity {
     private List<MenuModel> menuList = new ArrayList<>();
     private MenuAdapter mAdapter;
 
@@ -36,11 +28,12 @@ public class MenuList extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_menu_list);
+
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-      //  prepareMovieData();
+        //  prepareMovieData();
 
         mAdapter = new MenuAdapter(menuList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -50,6 +43,7 @@ public class MenuList extends AppCompatActivity {
         //prepareMovieData();
 
 
+
         prepareMenuData();
 //
 //        prepareMenuData(dhmsg());
@@ -57,9 +51,9 @@ public class MenuList extends AppCompatActivity {
     private void prepareMenuData() {
         //Toast.makeText(this, ""+value, Toast.LENGTH_SHORT).show();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();// jjjjj
-       // Intent intent = getIntent();
+        // Intent intent = getIntent();
         //String str = intent.getStringExtra("fc");
-        DatabaseReference ref = database.getReference("AddMenu"); //working for single location
+        DatabaseReference ref = database.getReference("AddBooks"); //working for single location
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -67,37 +61,36 @@ public class MenuList extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 menuList.clear();
                 //https://stackoverflow.com/questions/52737082/java-util-hashmap-cannot-be-cast-to-com-google-android-gms-maps-model-latlng
-              // for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                // for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     String itemName = snapshot.child("itemName").getValue(String.class);
-                   // String itemNum = snapshot.child("itemNum").getValue(String.class);
+                    // String itemNum = snapshot.child("itemNum").getValue(String.class);
                     String itemPrice = snapshot.child("itemPrice").getValue(String.class);
 
-                   // Log.i("onDataChange", snapshot.getKey()+": "+itemName+", "+itemPrice);
-                 //   Toast.makeText(MenuList.this, ""+snapshot.getKey()+" : "+itemName+", "+itemPrice+" "+itemNum, Toast.LENGTH_SHORT).show();
-                     MenuModel movie = new MenuModel(itemName, itemPrice);
+                    // Log.i("onDataChange", snapshot.getKey()+": "+itemName+", "+itemPrice);
+                    //   Toast.makeText(MenuList.this, ""+snapshot.getKey()+" : "+itemName+", "+itemPrice+" "+itemNum, Toast.LENGTH_SHORT).show();
+                    MenuModel movie = new MenuModel(itemName, itemPrice);
                     menuList.add(movie);
                     mAdapter.notifyDataSetChanged();
 
                 }
-                   // Toast.makeText(MenuList.this, ""+snapshot.getValue()+""+snapshot.getValue()+""+snapshot.getValue(), Toast.LENGTH_SHORT).show();
-              // String  itemname=dataSnapshot.child("itemName").getValue(String.class);
-              //  Toast.makeText(MenuList.this, ""+itemname, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MenuList.this, ""+snapshot.getValue()+""+snapshot.getValue()+""+snapshot.getValue(), Toast.LENGTH_SHORT).show();
+                // String  itemname=dataSnapshot.child("itemName").getValue(String.class);
+                //  Toast.makeText(MenuList.this, ""+itemname, Toast.LENGTH_SHORT).show();
 
-                    //value are store in three different arraylist
-               // }
+                //value are store in three different arraylist
+                // }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
-                Toast.makeText(MenuList.this, "database read failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LibList.this, "database read failed", Toast.LENGTH_SHORT).show();
             }
         });
-       // MovieModel movie = new MovieModel("Fc menu", "Action & Adventure", "2015");
+        // MovieModel movie = new MovieModel("Fc menu", "Action & Adventure", "2015");
         //movieList.add(movie);
 
 //        mAdapter.notifyDataSetChanged();
     }
-
 }

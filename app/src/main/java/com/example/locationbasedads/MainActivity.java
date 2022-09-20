@@ -1,6 +1,7 @@
 package com.example.locationbasedads;
 
 import android.Manifest;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -19,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -37,9 +39,9 @@ public class MainActivity extends AppCompatActivity{
 
     double FClat=16.7930064;
     double FClong=80.8231883;
-    double Liblat=16.790896;
-    double Liblong=80.825397;
-    double FcDist,LibDist;
+//    double Liblat=16.790896;
+//    double Liblong=80.825397;
+   double FcDist,LibDist;
 
     //for notification message
     String strtitle,strtext;
@@ -48,28 +50,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //loading screen
-//
-//        Thread welcomeThread = new Thread() {
-//
-//            @Override
-//            public void run() {
-//                try {
-//                    super.run();
-//                    sleep(10000);  //Delay of 10 seconds
-//                } catch (Exception e) {
-//
-//                } finally {
-//
-//                    Intent i = new Intent(MainActivity.this, MenuList.class);
-//                    startActivity(i);
-//                    finish();
-//                }
-//            }
-//        };
-//        welcomeThread.start();
-        //end loading
 
         //getting location permission initially
         if (ContextCompat.checkSelfPermission(MainActivity.this,
@@ -136,51 +116,72 @@ public class MainActivity extends AppCompatActivity{
         double distance = currentLocation.distanceTo(destination);
         return distance;
     }
-//    public void fc(){
-//        strtitle="Food Court";
-//        strtext="For the love of delicious food...";
-//    }
-//    public void lib(){
-//        strtitle="Central Library";
-//        strtext="Nothing is pleasanter than exploring a library ";
-//    }
-//    public void dh2(){
-//        strtitle ="Dinning Hall";
-//        strtext="";
-//    }
+    public Intent fc(){
+        strtitle="Food Court";
+        strtext="For the love of delicious food...";
+        Intent intent=new Intent(getApplicationContext(),MenuList.class);
+//        intent.putExtra("1","fc");
+        return intent;
+    }
+    public Intent lib(){
+        strtitle="Central Library";
+        strtext="Nothing is pleasanter than exploring a library ";
+        Intent intent=new Intent(getApplicationContext(),LibList.class);
+//        intent.putExtra("2","lib");
+        return intent;
+    }
+    public Intent dh2(){
+        strtitle ="Dinning Hall-2";
+        strtext="Welcome to dinning hall";
+        Intent intent=new Intent(getApplicationContext(),DhList.class);
+//        intent.putExtra("3","dh");
+        return intent;
+    }
     private void matchLocationNotification(double latitude, double longitude) {
-//        Location currentLocation = new Location("locationA");
-//        currentLocation.setLatitude(FClat);
-//        currentLocation.setLongitude(FClong);
-//        Location destination = new Location("locationB");
-//        destination.setLatitude(latitude);
-//        destination.setLongitude(longitude);
+
         FcDist = calDistance(latitude, longitude, FClat, FClong);
         // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
 
         //Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
+        // 123 meters for three places
         if (FcDist <= 500 && flag == 0) {
             flag = 1;
             //createNotification();
             //createNotification();
-            CustomNotification();
+
+            CustomNotification(fc());
+            //dh2();
+            CustomNotification(lib());
+            CustomNotification(dh2());
+
         }
-        if (FcDist > 100) {
+        if (FcDist > 500) {
             flag = 0;
         }
     }
 
-    public void CustomNotification() {
+    public void CustomNotification( Intent intent) {
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_style);
-        strtitle = "Food Court";
-        strtext = "For the love of delicious food...";
+//        strtitle = "Food Court";
+//        strtext = "For the love of delicious food...";
         //String fc = "FC";
-        Intent intent = new Intent(this, MenuList.class);
+        //Intent intent = new Intent(getApplicationContext(), MenuList.class);
         intent.putExtra("title", strtitle);
         intent.putExtra("text", strtext);
-        //intent.putExtra("fc", fc);
-        //intent.putExtra("lat",FClat);
-        //intent.putExtra("long",FClong);
+//        Bundle bundle=new Bundle();
+
+//        if (num==1) bundle.putString("location","AddMenu");
+//        if (num==2) bundle.putString("location","AddBooks");
+//        if(num==3) bundle.putString("location","AddMess");
+//        intent.putExtras(bundle);
+//        if(num==1) intent.putExtra("location","AddMenu");
+//        if(num==2) intent.putExtra("location","AddBooks");
+//        if(num==3) intent.putExtra("location","AddMess");
+
+            //Toast.makeText(this, ""+strtitle+""+strtext, Toast.LENGTH_SHORT).show();
+//        intent.putExtra("fc", fc);
+//        intent.putExtra("lat",FClat);
+//        intent.putExtra("long",FClong);
         PendingIntent pIntent=null;
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
             pIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE);
@@ -196,7 +197,6 @@ public class MainActivity extends AppCompatActivity{
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
                 .setVibrate( new long []{ 500 , 1000 })
-                .setStyle(new NotificationCompat.InboxStyle())
                 .setAutoCancel(true) .setContentIntent(pIntent)
                 .setContent(remoteViews);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
@@ -204,12 +204,14 @@ public class MainActivity extends AppCompatActivity{
         remoteViews.setTextViewText(R.id.title,strtitle);
         remoteViews.setTextViewText(R.id.message,strtext);
         // Create Notification Manager
-        NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+     //   NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //NotificationManager notif = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+
         // Build Notification with Notification Manager
         NotificationManager mNotificationManager = (NotificationManager)
                 getSystemService(Context. NOTIFICATION_SERVICE ) ;
         if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
-            int importance = NotificationManager. IMPORTANCE_LOW ;
+            int importance = NotificationManager. IMPORTANCE_HIGH ;
             NotificationChannel notificationChannel = new NotificationChannel( NOTIFICATION_CHANNEL_ID , "NOTIFICATION_CHANNEL_NAME" , importance) ;
             builder.setChannelId( NOTIFICATION_CHANNEL_ID ) ;
             assert mNotificationManager != null;
