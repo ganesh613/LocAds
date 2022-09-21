@@ -165,17 +165,3 @@ public class GPSTracker extends Service implements LocationListener {
         return null;
     }
 }
-//Override
-//public void onProviderEnabled(String provider) {
-//// TODO Auto-generated method stub
-//        }
-//@Override
-//public void onStatusChanged(String provider, int status, Bundle extras) {
-//// TODO Auto-generated method stub
-//        }
-//@Override
-//public IBinder onBind(Intent intent) {
-//// TODO Auto-generated method stub
-//        return null;
-//        }
-//        }

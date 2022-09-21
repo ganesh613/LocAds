@@ -20,7 +20,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
         MyViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
-           // genre = view.findViewById(R.id.genre);
             cost = view.findViewById(R.id.cost);
         }
     }
@@ -38,7 +37,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         MenuModel movie = menuList.get(position);
         holder.title.setText(movie.getTitle());
-//        holder.genre.setText(movie.getGenre());
         holder.cost.setText(movie.getCost());
     }
     @Override

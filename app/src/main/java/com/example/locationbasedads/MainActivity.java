@@ -35,9 +35,7 @@ public class MainActivity extends AppCompatActivity{
 
     double FClat=16.7930064;
     double FClong=80.8231883;
-    double Liblat=16.790896;
-    double Liblong=80.825397;
-    double FcDist,LibDist;
+    double FcDist;
 
     //for notification message
 
@@ -68,7 +66,6 @@ public class MainActivity extends AppCompatActivity{
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, delay);
-//                Toast.makeText(MainActivity.this, "This method is run every 10 seconds",Toast.LENGTH_SHORT).show();
                 trackLocation();
             }
 
@@ -79,8 +76,6 @@ public class MainActivity extends AppCompatActivity{
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
                     // \n is for new line
-                  //  Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-                    //tvMyLocation.setText("latitude is :"+ latitude + "&&" + "longitude is :"+ longitude);
 
                     matchLocationNotification(latitude,longitude);
                 }else{
@@ -113,33 +108,10 @@ public class MainActivity extends AppCompatActivity{
         double distance = currentLocation.distanceTo(destination);
         return distance;
     }
-//    public void fc(){
-//        strtitle="Food Court";
-//        strtext="For the love of delicious food...";
-//    }
-//    public void lib(){
-//        strtitle="Central Library";
-//        strtext="Nothing is pleasanter than exploring a library ";
-//    }
-//    public void dh2(){
-//        strtitle ="Dinning Hall";
-//        strtext="";
-//    }
     private void matchLocationNotification(double latitude, double longitude) {
-//        Location currentLocation = new Location("locationA");
-//        currentLocation.setLatitude(FClat);
-//        currentLocation.setLongitude(FClong);
-//        Location destination = new Location("locationB");
-//        destination.setLatitude(latitude);
-//        destination.setLongitude(longitude);
         FcDist = calDistance(latitude, longitude, FClat, FClong);
-        // LibDist=calDistance(latitude,longitude,Liblat,Liblong);
-
-        //Toast.makeText(this, "Distance is : " + FcDist, Toast.LENGTH_SHORT).show();
         if (FcDist <= 500 && flag == 0) {
             flag = 1;
-            //createNotification();
-            //createNotification();
             CustomNotification();
         }
         if (FcDist > 500) {
@@ -154,8 +126,7 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, MenuList.class);
         intent.putExtra("title", strtitle);
         intent.putExtra("text", strtext);
-        //intent.putExtra("lat",FClat);
-        //intent.putExtra("long",FClong);
+
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
                 .setSmallIcon(R.drawable.playstore_logo)
@@ -181,7 +152,6 @@ public class MainActivity extends AppCompatActivity{
         assert mNotificationManager != null;
         mNotificationManager.notify(( int ) System. currentTimeMillis () ,
                 builder.build()) ;
-        //notificationmanager.notify(0, builder.build());
     }
 
     @Override
