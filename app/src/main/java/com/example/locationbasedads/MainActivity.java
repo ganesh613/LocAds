@@ -39,9 +39,8 @@ public class MainActivity extends AppCompatActivity{
 
     double FClat=16.7930064;
     double FClong=80.8231883;
-//    double Liblat=16.790896;
-//    double Liblong=80.825397;
-   double FcDist,LibDist;
+
+   double FcDist;
 
     //for notification message
     String strtitle,strtext;
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity{
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, delay);
-//                Toast.makeText(MainActivity.this, "This method is run every 10 seconds",Toast.LENGTH_SHORT).show();
                 trackLocation();
             }
 
@@ -82,9 +80,6 @@ public class MainActivity extends AppCompatActivity{
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
                     // \n is for new line
-                  //  Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-                    //tvMyLocation.setText("latitude is :"+ latitude + "&&" + "longitude is :"+ longitude);
-
                     matchLocationNotification(latitude,longitude);
                 }else{
                     // can't get location
