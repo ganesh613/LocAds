@@ -18,7 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MenuList extends AppCompatActivity {
 
 
@@ -73,7 +72,6 @@ public class MenuList extends AppCompatActivity {
                 Toast.makeText(MenuList.this, "database read failed", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
 }
