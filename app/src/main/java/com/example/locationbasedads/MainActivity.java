@@ -31,10 +31,12 @@ public class MainActivity extends AppCompatActivity{
     // update location time
     Handler handler = new Handler();
     Runnable runnable;
-    int delay = 5000;
+    int delay = 2000;
 
     double FClat=16.7930064;
     double FClong=80.8231883;
+    //double FClat=16.793026;
+    //double FClong=80.823236;
     double FcDist;
 
     //for notification message
@@ -110,11 +112,11 @@ public class MainActivity extends AppCompatActivity{
     }
     private void matchLocationNotification(double latitude, double longitude) {
         FcDist = calDistance(latitude, longitude, FClat, FClong);
-        if (FcDist <= 500 && flag == 0) {
+        if (FcDist <= 240 && flag == 0) {
             flag = 1;
             CustomNotification();
         }
-        if (FcDist > 500) {
+        if (FcDist > 240) {
             flag = 0;
         }
     }
