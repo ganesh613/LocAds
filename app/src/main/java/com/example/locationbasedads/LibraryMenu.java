@@ -1,13 +1,13 @@
 package com.example.locationbasedads;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuList extends AppCompatActivity {
+public class LibraryMenu extends AppCompatActivity {
 
 
     private List<MenuModel> menuList = new ArrayList<>();
@@ -26,11 +26,13 @@ public class MenuList extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mGetReference = mDatabase.getReference();
-   
 
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_menu_list);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu_list);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
         mAdapter = new MenuAdapter(menuList);
@@ -43,16 +45,16 @@ public class MenuList extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("title");
-            Toast.makeText(MenuList.this,""+value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LibraryMenu.this,""+value, Toast.LENGTH_SHORT).show();
             //The key argument here must match that used in the other activity
         }
-    }
 
+    }
 
     private void prepareMenuData() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference ref = database.getReference("AddMenu");
+        DatabaseReference ref = database.getReference("AddBooks");
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -64,20 +66,19 @@ public class MenuList extends AppCompatActivity {
                     String itemName = snapshot.child("itemName").getValue(String.class);
                     String itemPrice = snapshot.child("itemPrice").getValue(String.class);
 
-                  MenuModel movie = new MenuModel(itemName, itemPrice);
+                    MenuModel movie = new MenuModel(itemName, itemPrice);
                     menuList.add(movie);
                     mAdapter.notifyDataSetChanged();
 
                 }
-                    //value are store in three different arraylist
+                //value are store in three different arraylist
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
-                Toast.makeText(MenuList.this, "database read failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LibraryMenu.this, "database read failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

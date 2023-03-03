@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity{
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
-    private static int flag =0;
+    private static int flag =0,f2=0,f3=0;
     private static int gpsPermission=0;
 
     GPSTracker gps;
@@ -35,9 +35,20 @@ public class MainActivity extends AppCompatActivity{
 
     double FClat=16.7930064;
     double FClong=80.8231883;
+
+    double Loclat=16.5271359;
+    double Loclong=81.7326067;
+    double LocDist;
+    //my home town location
+    double Homelat=16.5268816;
+    double Homelong = 81.7320998;
+
+
     //double FClat=16.793026;
     //double FClong=80.823236;
     double FcDist;
+    double HomeDist;
+
 
     //for notification message
 
@@ -108,26 +119,66 @@ public class MainActivity extends AppCompatActivity{
         destination.setLatitude(y1);
         destination.setLongitude(y2);
         double distance = currentLocation.distanceTo(destination);
+//        Toast.makeText(MainActivity.this,""+distance,Toast.LENGTH_SHORT).show();
+
         return distance;
     }
     private void matchLocationNotification(double latitude, double longitude) {
         FcDist = calDistance(latitude, longitude, FClat, FClong);
+        LocDist = calDistance(latitude,longitude,Loclat,Loclong);
+        HomeDist = calDistance(latitude,longitude,Homelat,Homelong);
         if (FcDist <= 240 && flag == 0) {
             flag = 1;
-            CustomNotification();
+            Intent intent2=new Intent(this, MenuList.class);
+            setNotificationContent("FC","For the love of delicious food...",intent2);
+            CustomNotification("FC Food","For the love of delicious food...",intent2);
         }
         if (FcDist > 240) {
             flag = 0;
         }
+
+        if(HomeDist<=240 && f2==0){
+            f2=1;
+            Intent intent2=new Intent(this, LibraryMenu.class);
+            setNotificationContent("Home","For the love of unknown...",intent2);
+            CustomNotification("Home Love","For the love of unknown...",intent2);
+//            Toast.makeText(MainActivity.this," f2 value "+f2, Toast.LENGTH_SHORT).show();
+
+        }
+        if (HomeDist > 240) {
+            f2 = 0;
+        }
+
+        if (LocDist <= 240 && f3 == 0) {
+
+            f3 = 1;
+            Intent intent2=new Intent(this, MenuList.class);
+            setNotificationContent("Pkl","For the love of None...",intent2);
+            CustomNotification("Palakol","For the love of None...",intent2);
+
+        }
+        if (LocDist > 240) {
+            f3 = 0;
+        }
     }
 
-    public void CustomNotification() {
+    String strtitle1,strtext1;
+    Intent intent1;
+    public void setNotificationContent(String strtitle,String strtext,Intent intent){
+        strtitle1 = strtitle;
+        strtext1 = strtext;;
+        intent1 = intent;new Intent(this, MenuList.class);
+        intent1.putExtra("title", strtitle);
+        intent1.putExtra("text", strtext);
+    }
+
+    public void CustomNotification(String strtitle,String strtext,Intent intent) {
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_style);
-        String strtitle = "Food Court";
-        String strtext = "For the love of delicious food...";
-        Intent intent = new Intent(this, MenuList.class);
-        intent.putExtra("title", strtitle);
-        intent.putExtra("text", strtext);
+//        String strtitle = "Food Court";
+//        String strtext = "For the love of delicious food...";
+//        Intent intent = new Intent(this, MenuList.class);
+//        intent.putExtra("title", strtitle);
+//        intent.putExtra("text", strtext);
 
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,default_notification_channel_id)
@@ -136,6 +187,7 @@ public class MainActivity extends AppCompatActivity{
                 .setAutoCancel(true) .setContentIntent(pIntent)
                 .setContent(remoteViews);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
+
 
         remoteViews.setTextViewText(R.id.title,strtitle);
         remoteViews.setTextViewText(R.id.message,strtext);
