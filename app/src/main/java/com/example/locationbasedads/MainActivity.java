@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity{
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
-    private static int flag =0,f2=0,f3=0;
+    private static int flag =0,f2=0,f3=0,f4=0;
     private static int gpsPermission=0;
 
     GPSTracker gps;
@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity{
 
     double FClat=16.7930064;
     double FClong=80.8231883;
+
+    double Gammalat=16.790690,Gammalong=80.825175,GammaDist;
 
     double Loclat=16.5271359;
     double Loclong=81.7326067;
@@ -127,19 +129,23 @@ public class MainActivity extends AppCompatActivity{
         FcDist = calDistance(latitude, longitude, FClat, FClong);
         LocDist = calDistance(latitude,longitude,Loclat,Loclong);
         HomeDist = calDistance(latitude,longitude,Homelat,Homelong);
+        GammaDist = calDistance(latitude,longitude,Gammalat,Gammalong);
+        Toast.makeText(MainActivity.this,""+GammaDist,Toast.LENGTH_SHORT).show();
+
         if (FcDist <= 240 && flag == 0) {
             flag = 1;
             Intent intent2=new Intent(this, MenuList.class);
             setNotificationContent("FC","For the love of delicious food...",intent2);
             CustomNotification("FC Food","For the love of delicious food...",intent2);
         }
+
         if (FcDist > 240) {
             flag = 0;
         }
 
         if(HomeDist<=240 && f2==0){
             f2=1;
-            Intent intent2=new Intent(this, LibraryMenu.class);
+            Intent intent2=new Intent(this, MenuList.class);
             setNotificationContent("Home","For the love of unknown...",intent2);
             CustomNotification("Home Love","For the love of unknown...",intent2);
 //            Toast.makeText(MainActivity.this," f2 value "+f2, Toast.LENGTH_SHORT).show();
@@ -152,7 +158,7 @@ public class MainActivity extends AppCompatActivity{
         if (LocDist <= 240 && f3 == 0) {
 
             f3 = 1;
-            Intent intent2=new Intent(this, MenuList.class);
+            Intent intent2=new Intent(this, GammaEvents.class);
             setNotificationContent("Pkl","For the love of None...",intent2);
             CustomNotification("Palakol","For the love of None...",intent2);
 
@@ -160,6 +166,19 @@ public class MainActivity extends AppCompatActivity{
         if (LocDist > 240) {
             f3 = 0;
         }
+
+        if (GammaDist <= 400 && f4 == 0) {
+
+            f4 = 1;
+            Intent intent2=new Intent(this, GammaEvents.class);
+            setNotificationContent("Gamma cluster","Don't Quit",intent2);
+            CustomNotification("Gamma cluster","Don't Quit",intent2);
+
+        }
+        if (GammaDist > 400) {
+            f4 = 0;
+        }
+
     }
 
     String strtitle1,strtext1;
