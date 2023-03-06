@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity{
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
-    private static int flag =0,f2=0,f3=0,f4=0;
+
     private static int gpsPermission=0;
 
     GPSTracker gps;
@@ -33,24 +33,12 @@ public class MainActivity extends AppCompatActivity{
     Runnable runnable;
     int delay = 2000;
 
-    double FClat=16.7930064;
-    double FClong=80.8231883;
-
-    double Gammalat=16.790690,Gammalong=80.825175,GammaDist;
-
-    double Loclat=16.5271359;
-    double Loclong=81.7326067;
-    double LocDist;
-    //my home town location
-    double Homelat=16.5268816;
-    double Homelong = 81.7320998;
-
-
-    //double FClat=16.793026;
-    //double FClong=80.823236;
-    double FcDist;
-    double HomeDist;
-
+    private static int f1 =0,f2=0,f3=0,f4=0,f5=0;
+    double FClat=16.7930064,FClong=80.8231883,FcDist;
+    double Gammalat=16.790551,Gammalong=80.825317,GammaDist;
+    double Etalat=16.791075,Etalong=80.825459,EtaDist;
+    double Lambdalat=16.791560,Lambdalong=80.825642,LambdaDist;
+    double Kappalat=16.791720,Kappalong=80.824952,KappaDist;
 
     //for notification message
 
@@ -58,7 +46,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         //getting location permission initially
@@ -127,56 +114,72 @@ public class MainActivity extends AppCompatActivity{
     }
     private void matchLocationNotification(double latitude, double longitude) {
         FcDist = calDistance(latitude, longitude, FClat, FClong);
-        LocDist = calDistance(latitude,longitude,Loclat,Loclong);
-        HomeDist = calDistance(latitude,longitude,Homelat,Homelong);
+//        LocDist = calDistance(latitude,longitude,Loclat,Loclong);
+//        HomeDist = calDistance(latitude,longitude,Homelat,Homelong);
         GammaDist = calDistance(latitude,longitude,Gammalat,Gammalong);
+        EtaDist=calDistance(latitude,longitude,Etalat,Etalong);
+        LambdaDist=calDistance(latitude,longitude,Lambdalat,Lambdalong);
+        KappaDist=calDistance(latitude,longitude,Kappalat,Kappalong);
+
         Toast.makeText(MainActivity.this,""+GammaDist,Toast.LENGTH_SHORT).show();
 
-        if (FcDist <= 240 && flag == 0) {
-            flag = 1;
+        if (FcDist <= 240 && f1 == 0) {
+            f1 = 1;
             Intent intent2=new Intent(this, MenuList.class);
             setNotificationContent("FC","For the love of delicious food...",intent2);
             CustomNotification("FC Food","For the love of delicious food...",intent2);
         }
 
         if (FcDist > 240) {
-            flag = 0;
+            f1 = 0;
         }
 
-        if(HomeDist<=240 && f2==0){
-            f2=1;
-            Intent intent2=new Intent(this, MenuList.class);
-            setNotificationContent("Home","For the love of unknown...",intent2);
-            CustomNotification("Home Love","For the love of unknown...",intent2);
-//            Toast.makeText(MainActivity.this," f2 value "+f2, Toast.LENGTH_SHORT).show();
+        if (GammaDist <= 35 && f2 == 0) {
 
-        }
-        if (HomeDist > 240) {
-            f2 = 0;
-        }
-
-        if (LocDist <= 240 && f3 == 0) {
-
-            f3 = 1;
-            Intent intent2=new Intent(this, GammaEvents.class);
-            setNotificationContent("Pkl","For the love of None...",intent2);
-            CustomNotification("Palakol","For the love of None...",intent2);
-
-        }
-        if (LocDist > 240) {
-            f3 = 0;
-        }
-
-        if (GammaDist <= 400 && f4 == 0) {
-
-            f4 = 1;
+            f2 = 1;
             Intent intent2=new Intent(this, GammaEvents.class);
             setNotificationContent("Gamma cluster","Don't Quit",intent2);
             CustomNotification("Gamma cluster","Don't Quit",intent2);
 
         }
-        if (GammaDist > 400) {
+        if (GammaDist > 35) {
+            f2 = 0;
+        }
+
+        if ( EtaDist<= 35 && f3 == 0) {
+
+            f3 = 1;
+            Intent intent2=new Intent(this, EtaEvents.class);
+            setNotificationContent("Eta cluster","Keep going",intent2);
+            CustomNotification("Eta cluster","Keep going",intent2);
+
+        }
+        if (EtaDist > 35) {
+            f3 = 0;
+        }
+
+        if ( LambdaDist<= 31 && f4 == 0) {
+
+            f4 = 1;
+            Intent intent2=new Intent(this, LambdaEvents.class);
+            setNotificationContent("Eta cluster","Keep going",intent2);
+            CustomNotification("Eta cluster","Keep going",intent2);
+
+        }
+        if (LambdaDist > 31) {
             f4 = 0;
+        }
+
+        if ( KappaDist<= 31 && f5 == 0) {
+
+            f5 = 1;
+            Intent intent2=new Intent(this, KappaEvents.class);
+            setNotificationContent("Kappa cluster","Cutting edge with techies",intent2);
+            CustomNotification("Kappa cluster","Cutting edge with techies",intent2);
+
+        }
+        if (KappaDist > 31) {
+            f5 = 0;
         }
 
     }

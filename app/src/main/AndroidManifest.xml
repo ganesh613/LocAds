@@ -19,10 +19,16 @@
         android:theme="@style/Theme.Locationbasedads"
         tools:targetApi="31">
         <activity
+            android:name=".KappaEvents"
+            android:exported="false" />
+        <activity
+            android:name=".LambdaEvents"
+            android:exported="false" />
+        <activity
             android:name=".GammaEvents"
             android:exported="false" />
         <activity
-            android:name=".LibraryMenu"
+            android:name=".EtaEvents"
             android:exported="false" />
         <activity
             android:name=".LoadingScreen"

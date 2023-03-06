@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryMenu extends AppCompatActivity {
+public class LambdaEvents extends AppCompatActivity {
 
 
     private List<MenuModel> menuList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class LibraryMenu extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("title");
-            Toast.makeText(LibraryMenu.this,""+value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LambdaEvents.this,""+value, Toast.LENGTH_SHORT).show();
             //The key argument here must match that used in the other activity
         }
 
@@ -54,7 +54,7 @@ public class LibraryMenu extends AppCompatActivity {
     private void prepareMenuData() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference ref = database.getReference("AddBooks");
+        DatabaseReference ref = database.getReference("Lambda");
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -77,7 +77,7 @@ public class LibraryMenu extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
-                Toast.makeText(LibraryMenu.this, "database read failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LambdaEvents.this, "database read failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

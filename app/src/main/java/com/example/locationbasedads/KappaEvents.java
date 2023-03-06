@@ -18,7 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GammaEvents extends AppCompatActivity {
+public class KappaEvents extends AppCompatActivity {
+
 
 
     private List<MenuModel> menuList = new ArrayList<>();
@@ -45,7 +46,7 @@ public class GammaEvents extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("title");
-            Toast.makeText(GammaEvents.this,""+value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(KappaEvents.this,""+value, Toast.LENGTH_SHORT).show();
             //The key argument here must match that used in the other activity
         }
 
@@ -54,7 +55,7 @@ public class GammaEvents extends AppCompatActivity {
     private void prepareMenuData() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference ref = database.getReference("Gamma");
+        DatabaseReference ref = database.getReference("Kappa");
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -77,8 +78,9 @@ public class GammaEvents extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
-                Toast.makeText(GammaEvents.this, "database read failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(KappaEvents.this, "database read failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }
