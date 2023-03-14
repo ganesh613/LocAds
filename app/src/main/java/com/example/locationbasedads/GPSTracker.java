@@ -26,9 +26,9 @@ public class GPSTracker extends Service implements LocationListener {
     double latitude; // latitude
     double longitude; // longitude
     // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 5 meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0; // 5 meters
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 1 * 1; // 1 minute 1000*60*1
     // Declaring a Location Manager
     protected LocationManager locationManager;
     public GPSTracker(Context context) {
@@ -51,7 +51,8 @@ public class GPSTracker extends Service implements LocationListener {
             } else {
                 this.canGetLocation = true;
                 if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    //LocationManager.NETWORK_PROVIDER changed
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     Log.d("Network", "Network");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -150,6 +151,9 @@ public class GPSTracker extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
 // TODO Auto-generated method stub
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+
     }
     @Override
     public void onProviderDisabled(String provider) {
