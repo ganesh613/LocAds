@@ -53,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
     private double Etalong[]=new double[]{80.825307,80.825185,80.825106,80.825506,80.825430};
     private double EtaDist[]=new double[5];
 
-    private double Lambdalat = 16.791560, Lambdalong = 80.825642, LambdaDist;
+
+//    private double Lambdalat = 16.791560, Lambdalong = 80.825642, LambdaDist;
+    private double Lambdalat[]=new double[]{16.791569,16.791769,16.791451,16.791653,16.790364};
+    private double Lambdalong[]=new double[]{80.825615,80.825500,80.825382,80.825861,80.825773};
+    private double LambdaDist[]=new double[5];
+
     private double Kappalat = 16.791720, Kappalong = 80.824952, KappaDist;
 
     // checking with four coordinates
@@ -157,9 +162,9 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0;i<GammaDist.length;i++) {
             GammaDist[i] = calDistance(latitude, longitude, Gammalat[i], Gammalong[i]);
             EtaDist[i]=calDistance(latitude,longitude,Etalat[i],Etalong[i]);
+            LambdaDist[i]=calDistance(latitude,longitude,Lambdalat[i],Lambdalong[i]);
         }
 
-        LambdaDist=calDistance(latitude,longitude,Lambdalat,Lambdalong);
         KappaDist=calDistance(latitude,longitude,Kappalat,Kappalong);
 
 //        Toast.makeText(MainActivity.this," Gamma "+GammaDist+" FC "+FcDist+" Kappa "+KappaDist+" Eta dist "+EtaDist+" Lambda "+LambdaDist,Toast.LENGTH_SHORT).show();
@@ -169,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (FcDist <= 52 && f1 == 0) {
             f1 = 1;
+
             Intent intent2=new Intent(this, MenuList.class);
             setNotificationContent("FC","For the love of delicious food...",intent2);
             CustomNotification("FC Food","For the love of delicious food...",intent2);
@@ -178,14 +184,17 @@ public class MainActivity extends AppCompatActivity {
             f1 = 0;
         }
 
-        int c=0,c2=0;//for cheking distance range
+        int c=0,c2=0,c3=0;//for cheking distance range
         for(int i=1;i<5;i++){
             if (GammaDist[i]<=10)
                 c=1;
-            if(EtaDist[i]<=10)
+            if (EtaDist[i]<=10)
                 c2=1;
+            if (LambdaDist[i]<=11)
+                c3=0;
         }
 //        (GammaDist[0] <= 35 || GammaDist[1] <= 35 || GammaDist[2] <= 35 || GammaDist[3] <= 35 || GammaDist[4] <= 35 )
+
         if ((GammaDist[0]<=26 || c==1) && f2 == 0) {
             f2 = 1;
             Intent intent2=new Intent(this, GammaEvents.class);
@@ -208,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             f3 = 0;
         }
 
-        if ( LambdaDist<= 31 && f4 == 0) {
+        if ( LambdaDist[0]<= 29 || c3==1 && f4 == 0) {
 
             f4 = 1;
             Intent intent2=new Intent(this, LambdaEvents.class);
@@ -216,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
             CustomNotification("Lambda cluster","Keep going",intent2);
 
         }
-        if (LambdaDist > 31) {
+        if (LambdaDist[0] > 29 || c3==0) {
             f4 = 0;
         }
 
