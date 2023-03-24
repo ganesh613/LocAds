@@ -18,6 +18,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import java.util.Arrays;
+
 
 public class MainActivity extends AppCompatActivity{
 
@@ -31,14 +33,24 @@ public class MainActivity extends AppCompatActivity{
     // update location time
     Handler handler = new Handler();
     Runnable runnable;
-    int delay = 2000;
+    int delay = 1000;
 
-    private static int f1 =0,f2=0,f3=0,f4=0,f5=0;
+//    private static int f1 =0,f2=0,f3=0,f4=0,f5=0;
+    private static int f[]=new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     double FClat=16.7930064,FClong=80.8231883,FcDist;
     double Gammalat=16.790551,Gammalong=80.825317,GammaDist;
     double Etalat=16.791075,Etalong=80.825459,EtaDist;
-    double Lambdalat=16.791560,Lambdalong=80.825642,LambdaDist;
+    double Lambdalat=16.791557,Lambdalong=80.825653,LambdaDist;
     double Kappalat=16.791720,Kappalong=80.824952,KappaDist;
+    double Prefablat=16.790399,Prefablong=80.825571,PrefabDist;
+    double Muelat=16.792029,Muelong=80.825798,MueDist;
+    double Omegalat=16.792199,Omegalong=80.825134,OmegaDist;
+    double Saclat=16.794143,Saclong=80.827165,SacDist;
+    double Groundlat=16.794143,Groundlong=80.827165,GroundDist;
+    double ABlat=16.791746,ABlong=80.821225,ABDist;
+    double Hospitallat=16.793463,Hospitallong=80.824586,HospitalDist;
+    double Atmlat=16.793674,Atmlong=80.825338,AtmDist;
+    double Hhandlat=16.791746,Hhandlong=80.821225,HhandDist;
 
     //for notification message
 
@@ -120,66 +132,184 @@ public class MainActivity extends AppCompatActivity{
         EtaDist=calDistance(latitude,longitude,Etalat,Etalong);
         LambdaDist=calDistance(latitude,longitude,Lambdalat,Lambdalong);
         KappaDist=calDistance(latitude,longitude,Kappalat,Kappalong);
+        PrefabDist=calDistance(latitude,longitude,Prefablat,Prefablong);
+        MueDist=calDistance(latitude,longitude,Muelat,Muelong);
+        OmegaDist=calDistance(latitude,longitude,Omegalat,Omegalong);
+        SacDist=calDistance(latitude,longitude,Saclat,Saclong);
+        GroundDist=calDistance(latitude,longitude,Groundlat,Groundlong);
+        ABDist=calDistance(latitude,longitude,ABlat,ABlong);
+        HospitalDist=calDistance(latitude,longitude,Hospitallat,Hospitallong);
+        AtmDist=calDistance(latitude,longitude,Atmlat,Atmlong);
+        HhandDist=calDistance(latitude,longitude,Hhandlat,Hhandlong);
 
-        Toast.makeText(MainActivity.this,""+GammaDist,Toast.LENGTH_SHORT).show();
 
-        if (FcDist <= 240 && f1 == 0) {
-            f1 = 1;
+        Toast.makeText(MainActivity.this,"ground"+GroundDist,Toast.LENGTH_SHORT).show();
+
+
+        if (FcDist <= 45 && f[0] == 0) {
+            f[0] = 1;
             Intent intent2=new Intent(this, MenuList.class);
             setNotificationContent("FC","For the love of delicious food...",intent2);
             CustomNotification("FC Food","For the love of delicious food...",intent2);
         }
 
-        if (FcDist > 240) {
-            f1 = 0;
+        if (FcDist > 45) {
+            f[0] = 0;
         }
 
-        if (GammaDist <= 35 && f2 == 0) {
+        if (GammaDist <= 35 && f[1] == 0) {
 
-            f2 = 1;
+            f[1] = 1;
             Intent intent2=new Intent(this, GammaEvents.class);
             setNotificationContent("Gamma cluster","Don't Quit",intent2);
             CustomNotification("Gamma cluster","Don't Quit",intent2);
 
         }
         if (GammaDist > 35) {
-            f2 = 0;
+            f[1] = 0;
         }
 
-        if ( EtaDist<= 35 && f3 == 0) {
+        if ( EtaDist<= 35 && f[2] == 0) {
 
-            f3 = 1;
+            f[2] = 1;
             Intent intent2=new Intent(this, EtaEvents.class);
             setNotificationContent("Eta cluster","Keep going",intent2);
             CustomNotification("Eta cluster","Keep going",intent2);
 
         }
         if (EtaDist > 35) {
-            f3 = 0;
+            f[2] = 0;
         }
 
-        if ( LambdaDist<= 31 && f4 == 0) {
+        if ( LambdaDist<= 31 && f[3] == 0) {
 
-            f4 = 1;
+            f[3] = 1;
             Intent intent2=new Intent(this, LambdaEvents.class);
-            setNotificationContent("Eta cluster","Keep going",intent2);
-            CustomNotification("Eta cluster","Keep going",intent2);
+            setNotificationContent("Lambda cluster","Keep going",intent2);
+            CustomNotification("Lambda cluster","Keep going",intent2);
 
         }
         if (LambdaDist > 31) {
-            f4 = 0;
+            f[3] = 0;
         }
 
-        if ( KappaDist<= 31 && f5 == 0) {
+       if ( KappaDist<= 31 && f[4] == 0) {
 
-            f5 = 1;
+            f[4] = 1;
             Intent intent2=new Intent(this, KappaEvents.class);
             setNotificationContent("Kappa cluster","Cutting edge with techies",intent2);
             CustomNotification("Kappa cluster","Cutting edge with techies",intent2);
 
         }
         if (KappaDist > 31) {
-            f5 = 0;
+            f[4] = 0;
+        }
+
+        if ( PrefabDist<= 56 && f[5] == 0) {
+
+            f[5] = 1;
+            Intent intent2=new Intent(this, PrefabEvents.class);
+            setNotificationContent("Prefab","Enjoy the moments",intent2);
+            CustomNotification("Prefab ","Enjoy the moments",intent2);
+
+        }
+        if (PrefabDist > 56) {
+            f[5] = 0;
+        }
+
+        if ( MueDist<= 30 && f[6] == 0) {
+
+            f[6] = 1;
+            Intent intent2=new Intent(this, MueActivity.class);
+            setNotificationContent("Mue","Enjoy the moments",intent2);
+            CustomNotification("Mue","Enjoy the moments",intent2);
+
+        }
+        if (MueDist > 30) {
+            f[6] = 0;
+        }
+
+        if ( OmegaDist<= 38 && f[7] == 0) {
+
+            f[7] = 1;
+            Intent intent2=new Intent(this, OmegaEventa.class);
+            setNotificationContent("Omega","Enjoy the moments",intent2);
+            CustomNotification("Omega","Enjoy the moments",intent2);
+
+        }
+        if (OmegaDist > 38) {
+            f[7] = 0;
+        }
+
+        if ( SacDist<= 150 && f[8] == 0) {
+
+            f[8] = 1;
+            Intent intent2=new Intent(this, SacEvents.class);
+            setNotificationContent("SAC","Enjoy the moments",intent2);
+            CustomNotification("SAC","Enjoy the moments",intent2);
+
+        }
+        if (SacDist > 150) {
+            f[8] = 0;
+        }
+
+        if ( GroundDist<= 160 && f[9] == 0) {
+
+            f[9] = 1;
+            Intent intent2=new Intent(this, GroundEvents.class);
+            setNotificationContent("Ground","Enjoy the moments",intent2);
+            CustomNotification("Ground ","Enjoy the moments",intent2);
+
+        }
+        if (GroundDist > 160) {
+            f[9] = 0;
+        }
+
+        if ( ABDist<= 140 && f[10] == 0) {
+
+            f[10] = 1;
+            Intent intent2=new Intent(this, AcademicEvents.class);
+            setNotificationContent("Academic blocks","Enjoy the moments",intent2);
+            CustomNotification("Academic blocks","Enjoy the moments",intent2);
+        }
+        if (ABDist > 140) {
+            f[10] = 0;
+        }
+
+        if ( HospitalDist<= 38 && f[11] == 0) {
+
+            f[11] = 1;
+            Intent intent2=new Intent(this, HospitalEvents.class);
+            setNotificationContent("Hospital blocks","Enjoy the moments",intent2);
+            CustomNotification("Hospital blocks","Enjoy the moments",intent2);
+
+        }
+        if (HospitalDist > 38) {
+            f[11] = 0;
+        }
+
+        if ( AtmDist<= 40 && f[12] == 0) {
+
+            f[12] = 1;
+            Intent intent2=new Intent(this, AtmEvents.class);
+            setNotificationContent("ATM blocks","Enjoy the moments",intent2);
+            CustomNotification("ATM blocks","Enjoy the moments",intent2);
+
+        }
+        if (AtmDist > 40) {
+            f[12] = 0;
+        }
+
+        if ( HhandDist<= 27 && f[13] == 0) {
+
+            f[13] = 1;
+            Intent intent2=new Intent(this, HelpingHandsEvents.class);
+            setNotificationContent("Helping hands","Enjoy the moments",intent2);
+            CustomNotification("Helping hands","Enjoy the moments",intent2);
+
+        }
+        if (HhandDist > 27) {
+            f[13] = 0;
         }
 
     }
