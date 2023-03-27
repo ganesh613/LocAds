@@ -18,7 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelpingHandsEvents extends AppCompatActivity {
+public class ABEvents extends AppCompatActivity {
+
 
     private List<MenuModel> menuList = new ArrayList<>();
     private MenuAdapter mAdapter;
@@ -44,7 +45,7 @@ public class HelpingHandsEvents extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("title");
-            Toast.makeText(HelpingHandsEvents.this,""+value, Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(AcademicEvents.this,""+value, Toast.LENGTH_SHORT).show();
             //The key argument here must match that used in the other activity
         }
 
@@ -53,7 +54,7 @@ public class HelpingHandsEvents extends AppCompatActivity {
     private void prepareMenuData() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference ref = database.getReference("Helpinghands");
+        DatabaseReference ref = database.getReference("ABblock");
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -76,7 +77,7 @@ public class HelpingHandsEvents extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
-                Toast.makeText(HelpingHandsEvents.this, "database read failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ABEvents.this, "database read failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -7,9 +7,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -45,13 +49,13 @@ public class MainActivity extends AppCompatActivity{
     double Prefablat=16.790399,Prefablong=80.825571,PrefabDist;
     double Muelat=16.792029,Muelong=80.825798,MueDist;
     double Omegalat=16.792199,Omegalong=80.825134,OmegaDist;
-    double Saclat=16.794143,Saclong=80.827165,SacDist;
-    double Groundlat=16.794143,Groundlong=80.827165,GroundDist;
+    double Saclat=16.793966,Saclong=80.827151,SacDist;
+    double Groundlat=16.794296,Groundlong=80.826092,GroundDist;
     double ABlat=16.791746,ABlong=80.821225,ABDist;
     double Hospitallat=16.793463,Hospitallong=80.824586,HospitalDist;
     double Atmlat=16.793674,Atmlong=80.825338,AtmDist;
-    double Hhandlat=16.791746,Hhandlong=80.821225,HhandDist;
 
+    private Button viewButton;
     //for notification message
 
     @Override
@@ -59,6 +63,20 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewButton=findViewById(R.id.customButton);
+        viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                String referenceName = coursesLV2.getItemAtPosition(position).toString();
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                //   String referenceName = intent.getStringExtra("reference_name");
+                //Toast.makeText(MainActivity.this, "ref "+referenceName, Toast.LENGTH_SHORT).show();
+
+                startActivity(intent);
+
+            }
+        });
 
         //getting location permission initially
         if (ContextCompat.checkSelfPermission(MainActivity.this,
@@ -120,8 +138,23 @@ public class MainActivity extends AppCompatActivity{
         destination.setLatitude(y1);
         destination.setLongitude(y2);
         double distance = currentLocation.distanceTo(destination);
-//        Toast.makeText(MainActivity.this,""+distance,Toast.LENGTH_SHORT).show();
-
+////        Toast.makeText(MainActivity.this,""+distance,Toast.LENGTH_SHORT).show();
+//
+//        return distance;
+//        int R = 6371; // Earth radius in km
+//
+//        double dLat = Math.toRadians(x1 - y1);
+//        double dLon = Math.toRadians(x2 - y2);
+//        double lat1 = Math.toRadians(y1);
+//        double lat2 = Math.toRadians(y2);
+//
+//        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+//                Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//        double distance = R * c * 1000; // Convert to meters
+//        float[] results = new float[1];
+//        Location.distanceBetween(x1, x2, y1, y2, results);
+//        float distance = results[0];
         return distance;
     }
     private void matchLocationNotification(double latitude, double longitude) {
@@ -140,20 +173,19 @@ public class MainActivity extends AppCompatActivity{
         ABDist=calDistance(latitude,longitude,ABlat,ABlong);
         HospitalDist=calDistance(latitude,longitude,Hospitallat,Hospitallong);
         AtmDist=calDistance(latitude,longitude,Atmlat,Atmlong);
-        HhandDist=calDistance(latitude,longitude,Hhandlat,Hhandlong);
 
 
-        Toast.makeText(MainActivity.this,"ground"+GroundDist,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this,"kappa "+Math.round(KappaDist)+"\n Gamma "+Math.round(GammaDist)+"\n Eta "+Math.round(EtaDist)+"\n Fc "+Math.round(FcDist)+"\n Lambda "+Math.round(LambdaDist)+"\n Prefab "+Math.round(PrefabDist)+"\n Mue "+Math.round(MueDist)+"\n Omega "+Math.round(OmegaDist)+"\n SAC "+Math.round(SacDist)+"\n Ground "+Math.round(GroundDist)+"\n AB "+Math.round(ABDist)+"\n Hospital "+Math.round(HospitalDist)+"\n ATM "+Math.round(AtmDist)+"\n Hhand "+Math.round(HhandDist),Toast.LENGTH_SHORT).show();
 
 
-        if (FcDist <= 45 && f[0] == 0) {
+        if (FcDist <= 50 && f[0] == 0) {
             f[0] = 1;
             Intent intent2=new Intent(this, MenuList.class);
             setNotificationContent("FC","For the love of delicious food...",intent2);
             CustomNotification("FC Food","For the love of delicious food...",intent2);
         }
 
-        if (FcDist > 45) {
+        if (FcDist > 50) {
             f[0] = 0;
         }
 
@@ -181,7 +213,7 @@ public class MainActivity extends AppCompatActivity{
             f[2] = 0;
         }
 
-        if ( LambdaDist<= 31 && f[3] == 0) {
+        if ( LambdaDist<= 35 && f[3] == 0) {
 
             f[3] = 1;
             Intent intent2=new Intent(this, LambdaEvents.class);
@@ -189,7 +221,7 @@ public class MainActivity extends AppCompatActivity{
             CustomNotification("Lambda cluster","Keep going",intent2);
 
         }
-        if (LambdaDist > 31) {
+        if (LambdaDist > 35) {
             f[3] = 0;
         }
 
@@ -205,7 +237,7 @@ public class MainActivity extends AppCompatActivity{
             f[4] = 0;
         }
 
-        if ( PrefabDist<= 56 && f[5] == 0) {
+        if ( PrefabDist<= 30 && f[5] == 0) {
 
             f[5] = 1;
             Intent intent2=new Intent(this, PrefabEvents.class);
@@ -213,7 +245,7 @@ public class MainActivity extends AppCompatActivity{
             CustomNotification("Prefab ","Enjoy the moments",intent2);
 
         }
-        if (PrefabDist > 56) {
+        if (PrefabDist > 30) {
             f[5] = 0;
         }
 
@@ -229,7 +261,7 @@ public class MainActivity extends AppCompatActivity{
             f[6] = 0;
         }
 
-        if ( OmegaDist<= 38 && f[7] == 0) {
+        if ( OmegaDist<= 35 && f[7] == 0) {
 
             f[7] = 1;
             Intent intent2=new Intent(this, OmegaEventa.class);
@@ -237,11 +269,11 @@ public class MainActivity extends AppCompatActivity{
             CustomNotification("Omega","Enjoy the moments",intent2);
 
         }
-        if (OmegaDist > 38) {
+        if (OmegaDist > 35) {
             f[7] = 0;
         }
 
-        if ( SacDist<= 150 && f[8] == 0) {
+        if ( SacDist<= 80 && f[8] == 0) {
 
             f[8] = 1;
             Intent intent2=new Intent(this, SacEvents.class);
@@ -249,11 +281,11 @@ public class MainActivity extends AppCompatActivity{
             CustomNotification("SAC","Enjoy the moments",intent2);
 
         }
-        if (SacDist > 150) {
+        if (SacDist > 80) {
             f[8] = 0;
         }
 
-        if ( GroundDist<= 160 && f[9] == 0) {
+        if ( GroundDist<= 70 && f[9] == 0) {
 
             f[9] = 1;
             Intent intent2=new Intent(this, GroundEvents.class);
@@ -261,22 +293,22 @@ public class MainActivity extends AppCompatActivity{
             CustomNotification("Ground ","Enjoy the moments",intent2);
 
         }
-        if (GroundDist > 160) {
+        if (GroundDist > 70) {
             f[9] = 0;
         }
-
+// 140
         if ( ABDist<= 140 && f[10] == 0) {
 
             f[10] = 1;
-            Intent intent2=new Intent(this, AcademicEvents.class);
-            setNotificationContent("Academic blocks","Enjoy the moments",intent2);
-            CustomNotification("Academic blocks","Enjoy the moments",intent2);
+            Intent intent3=new Intent(MainActivity.this, ABEvents.class);
+            setNotificationContent("Academic blocks","Enjoy the moments",intent3);
+            CustomNotification("Academic blocks","Enjoy the moments",intent3);
         }
         if (ABDist > 140) {
             f[10] = 0;
         }
 
-        if ( HospitalDist<= 38 && f[11] == 0) {
+        if ( HospitalDist<= 40 && f[11] == 0) {
 
             f[11] = 1;
             Intent intent2=new Intent(this, HospitalEvents.class);
@@ -284,11 +316,11 @@ public class MainActivity extends AppCompatActivity{
             CustomNotification("Hospital blocks","Enjoy the moments",intent2);
 
         }
-        if (HospitalDist > 38) {
+        if (HospitalDist > 40) {
             f[11] = 0;
         }
 
-        if ( AtmDist<= 40 && f[12] == 0) {
+        if ( AtmDist<= 30 && f[12] == 0) {
 
             f[12] = 1;
             Intent intent2=new Intent(this, AtmEvents.class);
@@ -296,21 +328,11 @@ public class MainActivity extends AppCompatActivity{
             CustomNotification("ATM blocks","Enjoy the moments",intent2);
 
         }
-        if (AtmDist > 40) {
+        if (AtmDist > 30) {
             f[12] = 0;
         }
 
-        if ( HhandDist<= 27 && f[13] == 0) {
 
-            f[13] = 1;
-            Intent intent2=new Intent(this, HelpingHandsEvents.class);
-            setNotificationContent("Helping hands","Enjoy the moments",intent2);
-            CustomNotification("Helping hands","Enjoy the moments",intent2);
-
-        }
-        if (HhandDist > 27) {
-            f[13] = 0;
-        }
 
     }
 
@@ -337,7 +359,13 @@ public class MainActivity extends AppCompatActivity{
                 .setSmallIcon(R.drawable.playstore_logo)
                 .setVibrate( new long []{ 1000 , 1000 , 1000 , 1000 , 1000 })
                 .setAutoCancel(true) .setContentIntent(pIntent)
+//                .setColor(ContextCompat.getColor(this,R.color.notification_text_color))
                 .setContent(remoteViews);
+
+//        ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.notification_text_color);
+//        // Set the text color of the notification in both light and dark themes
+//        remoteViews.setTextColor(R.id.title, 1);
+//        remoteViews.setTextColor(R.id.message, 2);
         remoteViews.setImageViewResource(R.id.icon,R.drawable.playstore_logo);
 
 

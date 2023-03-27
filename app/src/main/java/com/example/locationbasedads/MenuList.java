@@ -47,7 +47,7 @@ public class MenuList extends AppCompatActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         Bundle extras = getIntent().getExtras();
         String value = extras.getString("title");
-        Toast.makeText(MenuList.this,""+value, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(MenuList.this,""+value, Toast.LENGTH_SHORT).show();
         //The key argument here must match that used in the other activity
 
         DatabaseReference ref=database.getReference("AddMenu");

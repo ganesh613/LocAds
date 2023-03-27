@@ -45,7 +45,7 @@ public class EtaEvents extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("title");
-            Toast.makeText(EtaEvents.this,""+value, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(EtaEvents.this,""+value, Toast.LENGTH_SHORT).show();
             //The key argument here must match that used in the other activity
         }
 

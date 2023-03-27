@@ -40,12 +40,44 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-
+        android:id="@+id/small_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/small_text"
+        android:layout_centerInParent="true"
+        android:text="@string/prompt3"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/sample_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/small_text"
+        app:layout_constraintVertical_bias="0.429" />
+
+    <Button
+        android:id="@+id/customButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Click here"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sample_text"
+        app:layout_constraintVertical_bias="0.14"
+
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

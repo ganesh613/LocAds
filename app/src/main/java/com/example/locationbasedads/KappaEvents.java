@@ -46,7 +46,7 @@ public class KappaEvents extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("title");
-            Toast.makeText(KappaEvents.this,""+value, Toast.LENGTH_SHORT).show();
+    //        Toast.makeText(KappaEvents.this,""+value, Toast.LENGTH_SHORT).show();
             //The key argument here must match that used in the other activity
         }
 
