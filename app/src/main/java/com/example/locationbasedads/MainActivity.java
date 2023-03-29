@@ -138,23 +138,9 @@ public class MainActivity extends AppCompatActivity{
         destination.setLatitude(y1);
         destination.setLongitude(y2);
         double distance = currentLocation.distanceTo(destination);
+
 ////        Toast.makeText(MainActivity.this,""+distance,Toast.LENGTH_SHORT).show();
-//
-//        return distance;
-//        int R = 6371; // Earth radius in km
-//
-//        double dLat = Math.toRadians(x1 - y1);
-//        double dLon = Math.toRadians(x2 - y2);
-//        double lat1 = Math.toRadians(y1);
-//        double lat2 = Math.toRadians(y2);
-//
-//        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-//                Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//        double distance = R * c * 1000; // Convert to meters
-//        float[] results = new float[1];
-//        Location.distanceBetween(x1, x2, y1, y2, results);
-//        float distance = results[0];
+
         return distance;
     }
     private void matchLocationNotification(double latitude, double longitude) {
@@ -193,8 +179,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[1] = 1;
             Intent intent2=new Intent(this, GammaEvents.class);
-            setNotificationContent("Gamma cluster","Don't Quit",intent2);
-            CustomNotification("Gamma cluster","Don't Quit",intent2);
+            setNotificationContent("Gamma cluster","Experts were once beginners",intent2);
+            CustomNotification("Gamma cluster","Experts were once beginners",intent2);
 
         }
         if (GammaDist > 35) {
@@ -205,8 +191,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[2] = 1;
             Intent intent2=new Intent(this, EtaEvents.class);
-            setNotificationContent("Eta cluster","Keep going",intent2);
-            CustomNotification("Eta cluster","Keep going",intent2);
+            setNotificationContent("Eta cluster","Experts were once beginners",intent2);
+            CustomNotification("Eta cluster","Experts were once beginners",intent2);
 
         }
         if (EtaDist > 35) {
@@ -217,8 +203,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[3] = 1;
             Intent intent2=new Intent(this, LambdaEvents.class);
-            setNotificationContent("Lambda cluster","Keep going",intent2);
-            CustomNotification("Lambda cluster","Keep going",intent2);
+            setNotificationContent("Lambda cluster","Experts were once beginners",intent2);
+            CustomNotification("Lambda cluster","Experts were once beginners",intent2);
 
         }
         if (LambdaDist > 35) {
@@ -229,8 +215,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[4] = 1;
             Intent intent2=new Intent(this, KappaEvents.class);
-            setNotificationContent("Kappa cluster","Cutting edge with techies",intent2);
-            CustomNotification("Kappa cluster","Cutting edge with techies",intent2);
+            setNotificationContent("Kappa cluster","Experts were once beginners",intent2);
+            CustomNotification("Kappa cluster","Experts were once beginners",intent2);
 
         }
         if (KappaDist > 31) {
@@ -253,23 +239,23 @@ public class MainActivity extends AppCompatActivity{
 
             f[6] = 1;
             Intent intent2=new Intent(this, MueActivity.class);
-            setNotificationContent("Mue","Enjoy the moments",intent2);
-            CustomNotification("Mue","Enjoy the moments",intent2);
+            setNotificationContent("Mue","Experts were once beginners",intent2);
+            CustomNotification("Mue","Experts were once beginners",intent2);
 
         }
         if (MueDist > 30) {
             f[6] = 0;
         }
 
-        if ( OmegaDist<= 35 && f[7] == 0) {
+        if ( OmegaDist<= 30 && f[7] == 0) {
 
             f[7] = 1;
             Intent intent2=new Intent(this, OmegaEventa.class);
-            setNotificationContent("Omega","Enjoy the moments",intent2);
-            CustomNotification("Omega","Enjoy the moments",intent2);
+            setNotificationContent("Omega","Experts were once beginners",intent2);
+            CustomNotification("Omega","Experts were once beginners",intent2);
 
         }
-        if (OmegaDist > 35) {
+        if (OmegaDist > 30) {
             f[7] = 0;
         }
 
@@ -277,8 +263,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[8] = 1;
             Intent intent2=new Intent(this, SacEvents.class);
-            setNotificationContent("SAC","Enjoy the moments",intent2);
-            CustomNotification("SAC","Enjoy the moments",intent2);
+            setNotificationContent("SAC","Keep playing",intent2);
+            CustomNotification("SAC","Keep playing",intent2);
 
         }
         if (SacDist > 80) {
@@ -289,7 +275,7 @@ public class MainActivity extends AppCompatActivity{
 
             f[9] = 1;
             Intent intent2=new Intent(this, GroundEvents.class);
-            setNotificationContent("Ground","Enjoy the moments",intent2);
+            setNotificationContent("Ground","",intent2);
             CustomNotification("Ground ","Enjoy the moments",intent2);
 
         }
