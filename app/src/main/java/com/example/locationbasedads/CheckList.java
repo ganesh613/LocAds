@@ -72,52 +72,8 @@ public class CheckList extends AppCompatActivity{
 //                mDatabase.getReference(referenceName+"/"+number.getNum()).removeValue();
 //                        //child(itemId).removeValue()
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(CheckList.this);
-                builder.setMessage("Are you sure you want to delete this item?")
-                        .setCancelable(false)
 
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // Get the item from the adapter
-                                String item = adapter.getItem(position);
-                                // Remove the item from the adapter
-                                adapter.remove(item);
-//                                Toast.makeText(CheckList.this, "item "+item, Toast.LENGTH_SHORT).show();
-                                // Notify the adapter that the data has changed
-                                adapter.notifyDataSetChanged();
-                                // Delete the item from Firebase database
-                                item.trim();
-                                String number=item.split(" ")[0];
-                                Toast.makeText(CheckList.this, "Numeeee "+number+" item"+item, Toast.LENGTH_SHORT).show();
-
-                                Query query = mDatabase.getReference(referenceName).orderByChild("itemNum").equalTo(number);
-                                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                            // Delete the child node from Firebase
-                                            snapshot.getRef().removeValue();
-                                        }
-                                    }
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        Log.e(TAG, "onCancelled", databaseError.toException());
-//                                        Toast.makeText(CheckList.this, "database error "+databaseError.toException(), Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // Dismiss the dialog
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-
-                adapter.notifyDataSetChanged();
+//                adapter.notifyDataSetChanged();
                 //Delete item form Firebase database
             }
         });
