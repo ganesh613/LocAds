@@ -167,8 +167,8 @@ public class MainActivity extends AppCompatActivity{
         if (FcDist <= 50 && f[0] == 0) {
             f[0] = 1;
             Intent intent2=new Intent(this, MenuList.class);
-            setNotificationContent("FC","For the love of delicious food...",intent2);
-            CustomNotification("FC Food","For the love of delicious food...",intent2);
+            setNotificationContent("Food-court","For the love of delicious food...",intent2);
+            CustomNotification("Food-court","For the love of delicious food...",intent2);
         }
 
         if (FcDist > 50) {
@@ -239,8 +239,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[6] = 1;
             Intent intent2=new Intent(this, MueActivity.class);
-            setNotificationContent("Mue","Experts were once beginners",intent2);
-            CustomNotification("Mue","Experts were once beginners",intent2);
+            setNotificationContent("Mue cluster","Experts were once beginners",intent2);
+            CustomNotification("Mue cluster","Experts were once beginners",intent2);
 
         }
         if (MueDist > 30) {
@@ -251,8 +251,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[7] = 1;
             Intent intent2=new Intent(this, OmegaEventa.class);
-            setNotificationContent("Omega","Experts were once beginners",intent2);
-            CustomNotification("Omega","Experts were once beginners",intent2);
+            setNotificationContent("Omega cluster","Experts were once beginners",intent2);
+            CustomNotification("Omega cluster","Experts were once beginners",intent2);
 
         }
         if (OmegaDist > 30) {
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity{
 
             f[9] = 1;
             Intent intent2=new Intent(this, GroundEvents.class);
-            setNotificationContent("Ground","",intent2);
+            setNotificationContent("Ground","Enjoy the moments",intent2);
             CustomNotification("Ground ","Enjoy the moments",intent2);
 
         }
@@ -298,8 +298,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[11] = 1;
             Intent intent2=new Intent(this, HospitalEvents.class);
-            setNotificationContent("Hospital blocks","Enjoy the moments",intent2);
-            CustomNotification("Hospital blocks","Enjoy the moments",intent2);
+            setNotificationContent("Hospital","Enjoy the moments",intent2);
+            CustomNotification("Hospital","Enjoy the moments",intent2);
 
         }
         if (HospitalDist > 40) {
@@ -310,8 +310,8 @@ public class MainActivity extends AppCompatActivity{
 
             f[12] = 1;
             Intent intent2=new Intent(this, AtmEvents.class);
-            setNotificationContent("ATM blocks","Enjoy the moments",intent2);
-            CustomNotification("ATM blocks","Enjoy the moments",intent2);
+            setNotificationContent("ATM","Enjoy the moments",intent2);
+            CustomNotification("ATM","Enjoy the moments",intent2);
 
         }
         if (AtmDist > 30) {
